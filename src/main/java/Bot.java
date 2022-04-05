@@ -51,7 +51,7 @@ public class Bot extends TelegramLongPollingBot {
         message.setChatId(Long.toString(chadID));
         message.setReplyToMessageId(update.getMessage().getMessageId());
         if (text == null) {
-            text = "Not found";
+            text = "Some issue, or fucking Yandex doesn't eat my proxy.";
         }
         message.setText(text);
         try {
@@ -134,12 +134,7 @@ public class Bot extends TelegramLongPollingBot {
                     break;
 
                 case "@zcwqBot /29":
-                    System.out.println("\n--------------------------------");
-                    System.out.println("Got 29.");
-
                     sendReplyMessage(update, BusParser.getMinByURL(BusParser.getBuses().get("29")));
-                    System.out.println("Sent 29-answer.");
-                    System.out.println("--------------------------------");
                     break;
             }
         }

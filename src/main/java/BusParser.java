@@ -2,7 +2,9 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
 
 public class BusParser {
@@ -16,19 +18,32 @@ public class BusParser {
     }
 
     static public String getMinByURL(String url) {
-        String result = "";
-        try {
-            Document doc = Jsoup.connect(url).get();
-            System.out.println("Got html.");
-            Element minTag = doc.getElementsByClass("masstransit-prognoses-view__title-text").get(0);
-            System.out.println("Try to get minTag.text()");
-            System.out.println("Parse for class - " + minTag.text());
-            result = minTag.text();
-        } catch (IOException e) {
-            System.out.println("Parsing error -----");
-            e.printStackTrace();
-        }
-        System.out.println("getMinURL - done: " + result);
+        String result = null;
+        ArrayList<HashMap<String, String>> data = ProxyProvider.getProxies();
+        Iterator<HashMap<String, String>> dataIterator = data.iterator();
+        int counter = 0;
+        do {
+            try {
+                HashMap<String, String> proxy = dataIterator.next();
+                System.setProperty("http.proxyHost", proxy.get("ip"));
+                System.setProperty("http.proxyPort", proxy.get("ip"));
+                System.out.println("Proxy: " + proxy.get("ip") + ":" + proxy.get("port")+". " + "Try: " + Integer.toString(counter++));
+                Document doc = Jsoup.connect(url).timeout(5 * 1000).get();
+                Element minTag = doc.getElementsByClass("masstransit-prognoses-view__title-text").get(0);
+                result = minTag.text();
+            } catch (IOException e) {
+                if(e.getMessage().equals("Connection timed out: connect") || e.getMessage().equals("connect timed out")){
+                    System.out.println("Current proxy is failed. Trying next.");
+                    continue;
+                } else {
+                    System.out.println(e.getMessage());
+                    e.printStackTrace();
+                }
+
+
+            }
+        } while (result == null && dataIterator.hasNext());
+
         return result;
     }
 }
