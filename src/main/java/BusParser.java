@@ -46,6 +46,8 @@ public class BusParser {
 
         if(!(result == null)) {
             System.out.println("Proxy: Successful");
+        } else {
+            System.out.println("Proxy: Fucking Yandex WON");
         }
 
         return result;
