@@ -112,6 +112,13 @@ public class Bot extends TelegramLongPollingBot {
             User user = getInfo(update);
 
             switch (update.getMessage().getText()) {
+                case "@zcwqBot /myInfo":
+                    sendMessage(update, "##################");
+                    sendMessage(update, "First name: " + user.getFirstName());
+                    sendMessage(update, "Last name: " + user.getLastName());
+                    sendMessage(update, "Username: " + user.getUserName());
+                    sendMessage(update, "ID: " + Long.toString(user.getId()));
+                    sendMessage(update, "##################");
                 case "/myInfo":
                     sendMessage(update, "##################");
                     sendMessage(update, "First name: " + user.getFirstName());
@@ -123,6 +130,11 @@ public class Bot extends TelegramLongPollingBot {
                     break;
 
                 case "/myId":
+                    sendMessage(update, "##################");
+                    sendMessage(update, Long.toString(user.getId()));
+                    sendMessage(update, "##################");
+                    break;
+	  case "@zcwqBot /myId":
                     sendMessage(update, "##################");
                     sendMessage(update, Long.toString(user.getId()));
                     sendMessage(update, "##################");
