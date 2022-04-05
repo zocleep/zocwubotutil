@@ -29,8 +29,14 @@ public class BusParser {
                 System.setProperty("http.proxyPort", proxy.get("ip"));
                 System.out.println("Proxy: " + proxy.get("ip") + ":" + proxy.get("port")+". " + "Try: " + Integer.toString(counter++));
                 Document doc = Jsoup.connect(url).timeout(5 * 1000).get();
-                Element minTag = doc.getElementsByClass("masstransit-prognoses-view__title-text").get(0);
-                result = minTag.text();
+                if(doc.toString().contains("masstransit-prognoses-view__title-text")) {
+                    Element minTag = doc.getElementsByClass("masstransit-prognoses-view__title-text").get(0);
+                    result = minTag.text();
+                } else {
+                    System.out.println("Current proxy is failed. Trying next.");
+                    continue;
+                }
+
             } catch (IOException e) {
                 if(e.getMessage().equals("Connection timed out: connect") || e.getMessage().equals("connect timed out")){
                     System.out.println("Current proxy is failed. Trying next.");
