@@ -44,6 +44,10 @@ public class BusParser {
             }
         } while (result == null && dataIterator.hasNext());
 
+        if(!(result == null)) {
+            System.out.println("Proxy: Successful");
+        }
+
         return result;
     }
 }
