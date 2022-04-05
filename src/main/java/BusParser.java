@@ -21,9 +21,11 @@ public class BusParser {
             Document doc = Jsoup.connect(url).get();
             System.out.println("Got html.");
             Element minTag = doc.getElementsByClass("masstransit-prognoses-view__title-text").get(0);
+            System.out.println("Try to get minTag.text()");
             System.out.println("Parse for class - " + minTag.text());
             result = minTag.text();
         } catch (IOException e) {
+            System.out.println("Parsing error -----");
             e.printStackTrace();
         }
         System.out.println("getMinURL - done: " + result);
