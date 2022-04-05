@@ -45,6 +45,22 @@ public class Bot extends TelegramLongPollingBot {
         }
     }
 
+    public void sendReplyMessage(@NotNull Update update, String text) {
+        long chadID = update.getMessage().getChatId();
+        SendMessage message = new SendMessage();
+        message.setChatId(Long.toString(chadID));
+        message.setReplyToMessageId(update.getMessage().getMessageId());
+        if(text == null) {
+            text = "Not found";
+        }
+        message.setText(text);
+        try {
+            execute(message);
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void sendToFather(@NotNull Update update, String text, boolean userName) {
         SendMessage message = new SendMessage();
         message.setParseMode(ParseMode.MARKDOWN);
@@ -118,8 +134,8 @@ public class Bot extends TelegramLongPollingBot {
                     sendToFather(update, "ID: " + Long.toString(user.getId()), false);
                     sendToFather(update, "###################", false);
                     break;
-                case "/29":
-                    sendMessage(update, BusParser.getMinByURL(BusParser.getBuses().get("29")));
+                case "@zcwqBot /29":
+                    sendReplyMessage(update, BusParser.getMinByURL(BusParser.getBuses().get("29")));
                     break;
             }
         }
