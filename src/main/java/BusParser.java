@@ -24,6 +24,7 @@ public class BusParser {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        System.out.println("getMinURL - done: " + result);
         return result;
     }
 }

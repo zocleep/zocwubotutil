@@ -34,8 +34,7 @@ public class Bot extends TelegramLongPollingBot {
         long chadID = update.getMessage().getChatId();
         SendMessage message = new SendMessage();
         message.setChatId(Long.toString(chadID));
-        message.setReplyToMessageId(update.getMessage().getMessageId());
-        if(text == null) {
+        if (text == null) {
             text = "Not found";
         }
         message.setText(text);
@@ -51,7 +50,7 @@ public class Bot extends TelegramLongPollingBot {
         SendMessage message = new SendMessage();
         message.setChatId(Long.toString(chadID));
         message.setReplyToMessageId(update.getMessage().getMessageId());
-        if(text == null) {
+        if (text == null) {
             text = "Not found";
         }
         message.setText(text);
@@ -66,14 +65,12 @@ public class Bot extends TelegramLongPollingBot {
         SendMessage message = new SendMessage();
         message.setParseMode(ParseMode.MARKDOWN);
         message.setChatId(InfoTaker.getInfoFromFile()[0]); // id from file "your_id.txt"
-        message.setReplyToMessageId(update.getMessage().getMessageId());
-        if(text == null) {
-        }
-        if(userName) {
-            if(update.getMessage().getChat().getUserName() == null) {
-                text = "[" + "Username is not found" + "](tg://user?id=" + update.getMessage().getChat().getId() +")";
+
+        if (userName) {
+            if (update.getMessage().getChat().getUserName() == null) {
+                text = "[" + "Username is not found" + "](tg://user?id=" + update.getMessage().getChat().getId() + ")";
             } else {
-                text = "[" + update.getMessage().getChat().getUserName() + "](tg://user?id=" + update.getMessage().getChat().getId() +")";
+                text = "[" + update.getMessage().getChat().getUserName() + "](tg://user?id=" + update.getMessage().getChat().getId() + ")";
             }
 
 
@@ -108,17 +105,10 @@ public class Bot extends TelegramLongPollingBot {
 
     @Override
     public void onUpdateReceived(Update update) {
-        if(update.getMessage().hasText()) {
+        if (update.getMessage().hasText()) {
             User user = getInfo(update);
 
             switch (update.getMessage().getText()) {
-                case "@zcwqBot /myInfo":
-                    sendMessage(update, "##################");
-                    sendMessage(update, "First name: " + user.getFirstName());
-                    sendMessage(update, "Last name: " + user.getLastName());
-                    sendMessage(update, "Username: " + user.getUserName());
-                    sendMessage(update, "ID: " + Long.toString(user.getId()));
-                    sendMessage(update, "##################");
                 case "/myInfo":
                     sendMessage(update, "##################");
                     sendMessage(update, "First name: " + user.getFirstName());
@@ -126,15 +116,9 @@ public class Bot extends TelegramLongPollingBot {
                     sendMessage(update, "Username: " + user.getUserName());
                     sendMessage(update, "ID: " + Long.toString(user.getId()));
                     sendMessage(update, "##################");
-
                     break;
 
                 case "/myId":
-                    sendMessage(update, "##################");
-                    sendMessage(update, Long.toString(user.getId()));
-                    sendMessage(update, "##################");
-                    break;
-	  case "@zcwqBot /myId":
                     sendMessage(update, "##################");
                     sendMessage(update, Long.toString(user.getId()));
                     sendMessage(update, "##################");
@@ -148,8 +132,11 @@ public class Bot extends TelegramLongPollingBot {
                     sendToFather(update, "ID: " + Long.toString(user.getId()), false);
                     sendToFather(update, "###################", false);
                     break;
+
                 case "@zcwqBot /29":
+                    System.out.println("Got 29.");
                     sendReplyMessage(update, BusParser.getMinByURL(BusParser.getBuses().get("29")));
+                    System.out.println("Sent 29-answer.");
                     break;
             }
         }
