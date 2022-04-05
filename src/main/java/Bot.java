@@ -134,9 +134,12 @@ public class Bot extends TelegramLongPollingBot {
                     break;
 
                 case "@zcwqBot /29":
+                    System.out.println("\n--------------------------------");
                     System.out.println("Got 29.");
+
                     sendReplyMessage(update, BusParser.getMinByURL(BusParser.getBuses().get("29")));
                     System.out.println("Sent 29-answer.");
+                    System.out.println("--------------------------------");
                     break;
             }
         }
