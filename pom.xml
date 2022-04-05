@@ -28,6 +28,8 @@
 
 
 
+
+
     <dependencies>
         <dependency>
             <groupId>org.telegram</groupId>
@@ -49,6 +51,11 @@
             <groupId>org.jsoup</groupId>
             <artifactId>jsoup</artifactId>
             <version>1.14.3</version>
+        </dependency>
+        <dependency>
+            <groupId>com.apple</groupId>
+            <artifactId>AppleJavaExtensions</artifactId>
+            <version>1.4</version>
         </dependency>
     </dependencies>
 
