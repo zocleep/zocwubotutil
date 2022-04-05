@@ -34,6 +34,7 @@ public class Bot extends TelegramLongPollingBot {
         long chadID = update.getMessage().getChatId();
         SendMessage message = new SendMessage();
         message.setChatId(Long.toString(chadID));
+        message.setReplyToMessageId(update.getMessage().getMessageId());
         if(text == null) {
             text = "Not found";
         }
@@ -65,6 +66,7 @@ public class Bot extends TelegramLongPollingBot {
         SendMessage message = new SendMessage();
         message.setParseMode(ParseMode.MARKDOWN);
         message.setChatId(InfoTaker.getInfoFromFile()[0]); // id from file "your_id.txt"
+        message.setReplyToMessageId(update.getMessage().getMessageId());
         if(text == null) {
         }
         if(userName) {
