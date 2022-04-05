@@ -19,7 +19,9 @@ public class BusParser {
         String result = "";
         try {
             Document doc = Jsoup.connect(url).get();
+            System.out.println("Got html.");
             Element minTag = doc.getElementsByClass("masstransit-prognoses-view__title-text").get(0);
+            System.out.println("Parse for class - " + minTag.text());
             result = minTag.text();
         } catch (IOException e) {
             e.printStackTrace();
