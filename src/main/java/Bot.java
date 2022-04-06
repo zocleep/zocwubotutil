@@ -134,6 +134,9 @@ public class Bot extends TelegramLongPollingBot {
                 case "/29":
                     sendReplyMessageForBuses(update, BusParser.getMinByURL(BusParser.getBuses().get("29")));
                     break;
+                case "/kek":
+                    sendMessage(update, Integer.toString(update.getUpdateId()));
+                    break;
             }
         }
     }
