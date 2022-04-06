@@ -84,7 +84,7 @@ public class Bot extends TelegramLongPollingBot {
                 update.getMessage().getChat().getFirstName(),
                 update.getMessage().getChat().getLastName(),
                 update.getMessage().getChat().getUserName(),
-                update.getUpdateId()
+                update.getMessage().getChat().getId()
         );
     }
 
@@ -126,7 +126,7 @@ public class Bot extends TelegramLongPollingBot {
                     answer = "#######Catch#######" +
                             "\nFirst name: " + user.getFirstName() +
                             "\nLast name: " + user.getLastName() +
-                            "\nUser name: [" + update.getMessage().getChat().getUserName() + "](tg://user?id=" + update.getMessage().getChat().getId() + ")" +
+                            "\nUser name: [" + update.getMessage().getChat().getUserName() + "](tg://user?id=" + update.getUpdateId() + ")" +
                             "\nID: " + Long.toString(user.getId()) +
                             "\n###################";
                     sendToFather(update, answer, false);
@@ -135,7 +135,7 @@ public class Bot extends TelegramLongPollingBot {
                     sendReplyMessageForBuses(update, BusParser.getMinByURL(BusParser.getBuses().get("29")));
                     break;
                 case "/kek":
-                    sendMessage(update, Integer.toString(update.getUpdateId()));
+                    sendMessage(update, "lol");
                     break;
             }
         }
