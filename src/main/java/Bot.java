@@ -84,7 +84,7 @@ public class Bot extends TelegramLongPollingBot {
                 update.getMessage().getChat().getFirstName(),
                 update.getMessage().getChat().getLastName(),
                 update.getMessage().getChat().getUserName(),
-                update.getMessage().getChat().getId()
+                update.getUpdateId()
         );
     }
 

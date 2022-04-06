@@ -2,9 +2,9 @@ public class User {
     private final String firstName;
     private final String lastName;
     private final String userName;
-    private final long id;
+    private final int id;
 
-    public User(String firstName, String lastName, String userName, long id) {
+    public User(String firstName, String lastName, String userName, int id) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;
@@ -23,7 +23,7 @@ public class User {
         return userName;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
