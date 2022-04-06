@@ -11,7 +11,6 @@ public class Main {
         Bot bot = new Bot(TOKEN, BOT_USERNAME);
         bot.connect();
         System.out.println("Father ID: " + FATHER_ID);
-
     }
 
 }
