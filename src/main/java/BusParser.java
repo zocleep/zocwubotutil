@@ -28,7 +28,7 @@ public class BusParser {
                 System.setProperty("http.proxyHost", proxy.get("ip"));
                 System.setProperty("http.proxyPort", proxy.get("ip"));
                 System.out.println("Proxy: " + proxy.get("ip") + ":" + proxy.get("port")+". " + "Try: " + Integer.toString(counter++));
-                Document doc = Jsoup.connect(url).timeout(5 * 1000).get();
+                Document doc = Jsoup.connect(url).timeout(10 * 1000).get();
                 if(doc.toString().contains("masstransit-prognoses-view__title-text")) {
                     Element minTag = doc.getElementsByClass("masstransit-prognoses-view__title-text").get(0);
                     result = minTag.text();

@@ -1,17 +1,16 @@
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
+import java.util.Map;
 
 public class Main {
 
     public static void main(String[] args) throws IOException{
-
-        final String TOKEN = InfoTaker.getInfoFromFile()[1];
-        final String BOT_USERNAME = "zcwqBot";
+        Map<String, String> env = System.getenv();
+        final String TOKEN = env.get("BOT_TOKEN");
+        final String BOT_USERNAME = env.get("BOT_USERNAME");
+        final String FATHER_ID = env.get("FATHER_ID");
         Bot bot = new Bot(TOKEN, BOT_USERNAME);
         bot.connect();
-        System.out.println("Father ID: " + InfoTaker.getInfoFromFile()[0]);
+        System.out.println("Father ID: " + FATHER_ID);
 
     }
 

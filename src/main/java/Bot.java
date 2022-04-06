@@ -7,6 +7,7 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 
 import javax.validation.constraints.NotNull;
+import java.util.Map;
 
 public class Bot extends TelegramLongPollingBot {
 
@@ -45,7 +46,7 @@ public class Bot extends TelegramLongPollingBot {
         }
     }
 
-    public void sendReplyMessage(@NotNull Update update, String text) {
+    public void sendReplyMessageForBuses(@NotNull Update update, String text) {
         long chadID = update.getMessage().getChatId();
         SendMessage message = new SendMessage();
         message.setChatId(Long.toString(chadID));
@@ -62,21 +63,15 @@ public class Bot extends TelegramLongPollingBot {
     }
 
     public void sendToFather(@NotNull Update update, String text, boolean userName) {
+        Map<String, String> env = System.getenv();
         SendMessage message = new SendMessage();
         message.setParseMode(ParseMode.MARKDOWN);
-        message.setChatId(InfoTaker.getInfoFromFile()[0]); // id from file "your_id.txt"
-
-        if (userName) {
-            if (update.getMessage().getChat().getUserName() == null) {
-                text = "[" + "Username is not found" + "](tg://user?id=" + update.getMessage().getChat().getId() + ")";
-            } else {
-                text = "[" + update.getMessage().getChat().getUserName() + "](tg://user?id=" + update.getMessage().getChat().getId() + ")";
-            }
-
-
+        if (text == null) {
+            text = "Not found";
         }
-
+        message.setChatId(env.get("FATHER_ID")); // id from file "your_id.txt"
         message.setText(text);
+
         try {
             execute(message);
         } catch (TelegramApiException e) {
@@ -107,15 +102,17 @@ public class Bot extends TelegramLongPollingBot {
     public void onUpdateReceived(Update update) {
         if (update.getMessage().hasText()) {
             User user = getInfo(update);
+            String answer = "";
 
             switch (update.getMessage().getText()) {
                 case "/myInfo":
-                    sendMessage(update, "##################");
-                    sendMessage(update, "First name: " + user.getFirstName());
-                    sendMessage(update, "Last name: " + user.getLastName());
-                    sendMessage(update, "Username: " + user.getUserName());
-                    sendMessage(update, "ID: " + Long.toString(user.getId()));
-                    sendMessage(update, "##################");
+                    answer = "#######Catch#######" +
+                        "\nFirst name: " + user.getFirstName() +
+                        "\nLast name: " + user.getLastName() +
+                        "\nUsername: " + user.getUserName() +
+                        "\nID: " + Long.toString(user.getId()) +
+                        "###################";
+                    sendMessage(update, answer);
                     break;
 
                 case "/myId":
@@ -125,16 +122,17 @@ public class Bot extends TelegramLongPollingBot {
                     break;
 
                 case "/cor":
-                    sendToFather(update, "#######Catch#######", false);
-                    sendToFather(update, "First name: " + user.getFirstName(), false);
-                    sendToFather(update, "Last name: " + user.getLastName(), false);
-                    sendToFather(update, "Username: " + user.getUserName(), true);
-                    sendToFather(update, "ID: " + Long.toString(user.getId()), false);
-                    sendToFather(update, "###################", false);
+                    answer = "#######Catch#######" +
+                            "\nFirst name: " + user.getFirstName() +
+                            "\nLast name: " + user.getLastName() +
+                            "User name: [" + update.getMessage().getChat().getUserName() + "](tg://user?id=" + update.getMessage().getChat().getId() + ")" +
+                            "\nID: " + Long.toString(user.getId()) +
+                            "###################";
+                    sendToFather(update, answer, false);
                     break;
 
                 case "@zcwqBot /29":
-                    sendReplyMessage(update, BusParser.getMinByURL(BusParser.getBuses().get("29")));
+                    sendReplyMessageForBuses(update, BusParser.getMinByURL(BusParser.getBuses().get("29")));
                     break;
             }
         }
