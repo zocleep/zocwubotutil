@@ -126,16 +126,13 @@ public class Bot extends TelegramLongPollingBot {
                     answer = "#######Catch#######" +
                             "\nFirst name: " + user.getFirstName() +
                             "\nLast name: " + user.getLastName() +
-                            "\nUser name: [" + update.getMessage().getChat().getUserName() + "](tg://user?id=" + update.getUpdateId() + ")" +
+                            "\nUser name: [" + update.getMessage().getChat().getUserName() + "](tg://user?id=" + update.getMessage().getChat().getId() + ")" +
                             "\nID: " + Long.toString(user.getId()) +
                             "\n###################";
                     sendToFather(update, answer, false);
                     break;
                 case "/29":
                     sendReplyMessageForBuses(update, BusParser.getMinByURL(BusParser.getBuses().get("29")));
-                    break;
-                case "/kek":
-                    sendMessage(update, "lol");
                     break;
             }
         }
