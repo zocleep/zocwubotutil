@@ -35,8 +35,11 @@ public class Bot extends TelegramLongPollingBot {
         long chadID = update.getMessage().getChatId();
         SendMessage message = new SendMessage();
         message.setChatId(Long.toString(chadID));
+        System.out.println("1");
         if (text == null) {
             text = "Not found";
+            System.out.println("2");
+            System.out.println(text);
         }
         message.setText(text);
         try {
