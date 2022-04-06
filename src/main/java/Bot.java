@@ -111,14 +111,15 @@ public class Bot extends TelegramLongPollingBot {
                         "\nLast name: " + user.getLastName() +
                         "\nUsername: " + user.getUserName() +
                         "\nID: " + Long.toString(user.getId()) +
-                        "###################";
+                        "\n###################";
                     sendMessage(update, answer);
                     break;
 
                 case "/myId":
-                    sendMessage(update, "##################");
-                    sendMessage(update, Long.toString(user.getId()));
-                    sendMessage(update, "##################");
+                    answer = "##################\n" +
+                            Long.toString(user.getId()) +
+                            "\n##################";
+                    sendMessage(update, answer);
                     break;
 
                 case "/cor":
@@ -127,7 +128,7 @@ public class Bot extends TelegramLongPollingBot {
                             "\nLast name: " + user.getLastName() +
                             "User name: [" + update.getMessage().getChat().getUserName() + "](tg://user?id=" + update.getMessage().getChat().getId() + ")" +
                             "\nID: " + Long.toString(user.getId()) +
-                            "###################";
+                            "\n###################";
                     sendToFather(update, answer, false);
                     break;
 
