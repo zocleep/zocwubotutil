@@ -131,8 +131,7 @@ public class Bot extends TelegramLongPollingBot {
                             "\n###################";
                     sendToFather(update, answer, false);
                     break;
-
-                case "@zcwqBot /29":
+                case "/29":
                     sendReplyMessageForBuses(update, BusParser.getMinByURL(BusParser.getBuses().get("29")));
                     break;
             }
