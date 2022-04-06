@@ -126,7 +126,7 @@ public class Bot extends TelegramLongPollingBot {
                     answer = "#######Catch#######" +
                             "\nFirst name: " + user.getFirstName() +
                             "\nLast name: " + user.getLastName() +
-                            "User name: [" + update.getMessage().getChat().getUserName() + "](tg://user?id=" + update.getMessage().getChat().getId() + ")" +
+                            "\nUser name: [" + update.getMessage().getChat().getUserName() + "](tg://user?id=" + update.getMessage().getChat().getId() + ")" +
                             "\nID: " + Long.toString(user.getId()) +
                             "\n###################";
                     sendToFather(update, answer, false);
