@@ -35,7 +35,7 @@ public class Bot extends TelegramLongPollingBot {
         SendMessage message = new SendMessage();
         message.setChatId(Long.toString(chadID));
         if (text.contains("null")) {
-            text = text.replace("null", "Not found");
+            text = text.replaceAll("null", "Not found");
         }
         message.setText(text);
         try {
@@ -51,7 +51,7 @@ public class Bot extends TelegramLongPollingBot {
         message.setChatId(Long.toString(chadID));
         message.setReplyToMessageId(update.getMessage().getMessageId());
         if (text.contains("null")) {
-            text = text.replace("null", "Not found");
+            text = text.replaceAll("null", "Not found");
         }
         message.setText(text);
         try {
@@ -66,7 +66,7 @@ public class Bot extends TelegramLongPollingBot {
         SendMessage message = new SendMessage();
         message.setParseMode(ParseMode.MARKDOWN);
         if (text.contains("null")) {
-            text = text.replace("null", "Not found");
+            text = text.replaceAll("null", "Not found");
         }
         message.setChatId(env.get("FATHER_ID")); // id from file "your_id.txt"
         message.setText(text);
