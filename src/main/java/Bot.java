@@ -38,8 +38,6 @@ public class Bot extends TelegramLongPollingBot {
         System.out.println(text);
         if (text == null) {
             text = "Not found";
-            System.out.println("2");
-            System.out.println(text);
         }
         message.setText(text);
         try {
