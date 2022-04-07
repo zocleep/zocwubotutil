@@ -1,12 +1,17 @@
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.api.methods.ParseMode;
+import org.telegram.telegrambots.meta.api.methods.commands.GetMyCommands;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class Bot extends TelegramLongPollingBot {
@@ -109,7 +114,7 @@ public class Bot extends TelegramLongPollingBot {
             String answer;
 
             switch (update.getMessage().getText()) {
-                case "/myInfo":
+                case "/my_info":
                     answer = "#######Catch#######" +
                             "\nFirst name: " + user.getFirstName() +
                             "\nLast name: " + user.getLastName() +
@@ -119,7 +124,7 @@ public class Bot extends TelegramLongPollingBot {
                     sendMessage(update, answer);
                     break;
 
-                case "/myId":
+                case "/my_id":
                     answer = "##################\n" +
                             user.getId() +
                             "\n##################";
@@ -137,6 +142,20 @@ public class Bot extends TelegramLongPollingBot {
                     break;
                 case "/29":
                     sendReplyMessageForBuses(update, BusParser.getMinByURL(BusParser.getBuses().get("29")));
+                    break;
+                case "/help":
+                    try {
+                        this.execute(new GetMyCommands());
+                    } catch (TelegramApiException e) {
+                        System.out.println("=========CMDs error=========");
+                        e.printStackTrace();
+                        System.out.println("============================");
+                    }
+
+                    break;
+                default:
+                    answer = "No such command. use /help to see all commands";
+                    sendMessage(update, answer);
                     break;
             }
         }
