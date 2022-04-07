@@ -34,8 +34,8 @@ public class Bot extends TelegramLongPollingBot {
         long chadID = update.getMessage().getChatId();
         SendMessage message = new SendMessage();
         message.setChatId(Long.toString(chadID));
-        if (text == null) {
-            text = "Not found";
+        if (text.contains("null")) {
+            text = text.replace("null", "Not found");
         }
         message.setText(text);
         try {
@@ -50,8 +50,8 @@ public class Bot extends TelegramLongPollingBot {
         SendMessage message = new SendMessage();
         message.setChatId(Long.toString(chadID));
         message.setReplyToMessageId(update.getMessage().getMessageId());
-        if (text == null) {
-            text = "Some issue, or fucking Yandex doesn't eat my proxy.";
+        if (text.contains("null")) {
+            text = text.replace("null", "Not found");
         }
         message.setText(text);
         try {
@@ -65,8 +65,8 @@ public class Bot extends TelegramLongPollingBot {
         Map<String, String> env = System.getenv();
         SendMessage message = new SendMessage();
         message.setParseMode(ParseMode.MARKDOWN);
-        if (text == null) {
-            text = "Not found";
+        if (text.contains("null")) {
+            text = text.replace("null", "Not found");
         }
         message.setChatId(env.get("FATHER_ID")); // id from file "your_id.txt"
         message.setText(text);
