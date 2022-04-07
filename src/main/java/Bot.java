@@ -109,7 +109,7 @@ public class Bot extends TelegramLongPollingBot {
 
             switch (update.getMessage().getText()) {
                 case "/my_info":
-                    answer = "#######Catch#######" +
+                    answer = "###################" +
                             "\nFirst name: " + user.getFirstName() +
                             "\nLast name: " + user.getLastName() +
                             "\nUsername: " + user.getUserName() +
