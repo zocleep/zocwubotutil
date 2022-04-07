@@ -106,22 +106,22 @@ public class Bot extends TelegramLongPollingBot {
     public void onUpdateReceived(Update update) {
         if (update.getMessage().hasText()) {
             User user = getInfo(update);
-            String answer = "";
+            String answer;
 
             switch (update.getMessage().getText()) {
                 case "/myInfo":
                     answer = "#######Catch#######" +
-                        "\nFirst name: " + user.getFirstName() +
-                        "\nLast name: " + user.getLastName() +
-                        "\nUsername: " + user.getUserName() +
-                        "\nID: " + Long.toString(user.getId()) +
-                        "\n###################";
+                            "\nFirst name: " + user.getFirstName() +
+                            "\nLast name: " + user.getLastName() +
+                            "\nUsername: " + user.getUserName() +
+                            "\nID: " + user.getId() +
+                            "\n###################";
                     sendMessage(update, answer);
                     break;
 
                 case "/myId":
                     answer = "##################\n" +
-                            Long.toString(user.getId()) +
+                            user.getId() +
                             "\n##################";
                     sendMessage(update, answer);
                     break;
@@ -131,7 +131,7 @@ public class Bot extends TelegramLongPollingBot {
                             "\nFirst name: " + user.getFirstName() +
                             "\nLast name: " + user.getLastName() +
                             "\nUser name: [" + update.getMessage().getChat().getUserName() + "](tg://user?id=" + update.getMessage().getChat().getId() + ")" +
-                            "\nID: " + Long.toString(user.getId()) +
+                            "\nID: " + user.getId() +
                             "\n###################";
                     sendToFather(update, answer, false);
                     break;
