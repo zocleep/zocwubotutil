@@ -1,9 +1,8 @@
-import java.io.IOException;
 import java.util.Map;
 
 public class Main {
 
-    public static void main(String[] args) throws IOException{
+    public static void main(String[] args) {
         Map<String, String> env = System.getenv();
         final String TOKEN = env.get("BOT_TOKEN");
         final String BOT_USERNAME = env.get("BOT_USERNAME");

@@ -5,6 +5,7 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
+
 import javax.validation.constraints.NotNull;
 import java.util.Map;
 
@@ -61,7 +62,7 @@ public class Bot extends TelegramLongPollingBot {
         }
     }
 
-    public void sendToFather(@NotNull Update update, String text, boolean userName) {
+    public void sendToFather(String text) {
         Map<String, String> env = System.getenv();
         SendMessage message = new SendMessage();
         message.setParseMode(ParseMode.MARKDOWN);
@@ -128,7 +129,7 @@ public class Bot extends TelegramLongPollingBot {
                             "\nUser name: [" + update.getMessage().getChat().getUserName() + "](tg://user?id=" + update.getMessage().getChat().getId() + ")" +
                             "\nID: " + user.getId() +
                             "\n###################";
-                    sendToFather(update, answer, false);
+                    sendToFather(answer);
                     break;
                 case "/29":
                     sendReplyMessageForBuses(update, BusParser.getMinByURL(BusParser.getBuses().get("29")));

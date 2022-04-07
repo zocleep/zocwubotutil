@@ -27,11 +27,5 @@ public class User {
         return id;
     }
 
-    public void printInfo() {
-        System.out.println("First name: " + this.firstName);
-        System.out.println("Last name: " + this.lastName);
-        System.out.println("User name: " + this.userName);
-        System.out.println("ID: " + this.id);
-    }
 
 }

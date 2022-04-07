@@ -1,6 +1,7 @@
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,20 +28,18 @@ public class BusParser {
                 HashMap<String, String> proxy = dataIterator.next();
                 System.setProperty("http.proxyHost", proxy.get("ip"));
                 System.setProperty("http.proxyPort", proxy.get("ip"));
-                System.out.println("Proxy: " + proxy.get("ip") + ":" + proxy.get("port")+". " + "Try: " + Integer.toString(counter++));
+                System.out.println("Proxy: " + proxy.get("ip") + ":" + proxy.get("port") + ". " + "Try: " + counter++);
                 Document doc = Jsoup.connect(url).timeout(10 * 1000).get();
-                if(doc.toString().contains("masstransit-prognoses-view__title-text")) {
+                if (doc.toString().contains("masstransit-prognoses-view__title-text")) {
                     Element minTag = doc.getElementsByClass("masstransit-prognoses-view__title-text").get(0);
                     result = minTag.text();
                 } else {
                     System.out.println("Current proxy is failed. Trying next.");
-                    continue;
                 }
 
             } catch (IOException e) {
-                if(e.getMessage().equals("Connection timed out: connect") || e.getMessage().equals("connect timed out")){
+                if (e.getMessage().equals("Connection timed out: connect") || e.getMessage().equals("connect timed out")) {
                     System.out.println("Current proxy is failed. Trying next.");
-                    continue;
                 } else {
                     System.out.println(e.getMessage());
                     e.printStackTrace();
@@ -50,7 +49,7 @@ public class BusParser {
             }
         } while (result == null && dataIterator.hasNext());
 
-        if(!(result == null)) {
+        if (!(result == null)) {
             System.out.println("Proxy: Successful");
         } else {
             System.out.println("Proxy: Fucking Yandex WON");
